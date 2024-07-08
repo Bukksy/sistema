@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regístrate</title>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+<body>
+    {% if error_message %}
+    <p>{{ error_message }}</p>
+    {% endif %}
+    <div class="body">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="head">
+                    <span>Regístrate</span>
+                    <p>Crea tu cuenta totalmente gratis</p>
+                </div>
+                <div class="inputs">
+                    <input type="text" name="username" placeholder="Ingresa un nombre de usuario" required>
+                    <input type="email" name="email" placeholder="Ingresa un email" required>
+                    <input type="password" id="password" name="password" placeholder="Ingresa una contraseña" required>
+                    <span id="password-error" style="color: red;"></span> <!-- Aquí mostrarás el mensaje de error -->
+                </div>
+                <button type="submit">Regístrate</button>
+            </form>
+            <div class="form-footer">
+                <p>¿Ya tienes una cuenta? <a href="{% url 'login-usuarios' %}">Inicia Sesión</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var passwordError = document.getElementById('password-error');
+
+            if (!validatePassword(password)) {
+                event.preventDefault();  // Evitar que se envíe el formulario si la contraseña no cumple
+                passwordError.textContent = 'La contraseña debe tener al menos una mayúscula y 8 caracteres.';
+            }
+        });
+
+        function validatePassword(password) {
+            var hasUpperCase = /[A-Z]/.test(password);
+            var hasLength = password.length >= 8;
+
+            return hasUpperCase && hasLength;
+        }
+    </script>
+</body>
+</html>

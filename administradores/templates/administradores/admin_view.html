@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador Principal</title>
+</head>
+<body>
+    <h2 style="text-align: center;">Productos de los Restaurantes</h2>
+    
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Restaurante</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre_producto }}</td>
+                <td>{{ producto.descripcion_producto }}</td>
+                <td>{{ producto.precio_producto }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>{{ producto.nombre_restaurante }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<br>
+    <hr>
+
+    <h2 style="text-align: center;">Restaurantes</h2>
+    
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre_restaurant</th>
+                <th>Descripcion</th>
+                <th>Especialidad</th>
+                <th>Ubicacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in restaurantes %}
+            <tr>
+                <td>{{ x.id_restaurante }}</td>
+                <td>{{ x.nombre_restaurant }}</td>
+                <td>{{ x.descripcion_restaurante}}</td>
+                <td>{{ x.id_categoriarest }}</td>
+                <td>{{ x.ubicacion_restaurant }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<br>
+    <hr>
+    <h2 style="text-align: center;">Usuarios Registrados</h2>
+    
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in usuarios %}
+            <tr>
+                <td>{{ x.id }}</td>
+                <td>{{ x.username }}</td>
+                <td>{{ x.email}}</td>
+                <td>{{ x.password }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'login' %}"><button>Salir</button></a>
+</body>
+</html>

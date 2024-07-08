@@ -1,0 +1,181 @@
+.cardds {
+    display: flex;
+    gap: 15px;
+    font-family: logo;
+    font-size: 20px;
+    text-shadow: 1px 1px 5px black;
+}
+
+.cardds .uno {
+background-color: #f0a56c;
+}
+
+.cardds .dos {
+background-color: #9fc089;
+}
+
+.cardds .tres {
+background-color: #79b4b0;
+}
+
+
+.cardds .cuatro {
+background-color: #efa229;
+}
+
+.cardds .cinco {
+background-color: #f3b24a;
+}
+
+
+.cardds .cardd {
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+height: 100px;
+width: 250px;
+border-radius: 10px;
+color: white;
+cursor: pointer;
+transition: 400ms;
+}
+
+.cardds .cardd p.tip {
+font-size: 1em;
+font-weight: 700;
+}
+
+.cardds .cardd p.second-text {
+font-size: .7em;
+}
+
+.cardds .cardd:hover {
+transform: scale(1.1, 1.1);
+}
+
+.cardds:hover > .cardd:not(:hover) {
+filter: blur(10px);
+transform: scale(0.9, 0.9);
+}
+
+.icon1{
+    width: 110px;
+    position: absolute;
+    translate: 5% 32%;
+}
+
+.icon2{
+    width: 110px;
+    position: absolute;
+    translate: 5% 0%;
+    rotate: 5deg;
+}
+
+.icon3{
+    width: 110px;
+    position: absolute;
+    translate: 10% 10%;
+    rotate: 5deg;
+}
+
+.icon4{
+    width: 100px;
+    position: absolute;
+    translate: 10% 15%;
+}
+
+.icon5{
+    width: 100px;
+    position: absolute;
+    translate: 15% 8%;
+}
+
+.tip{
+    display: block;
+    position: absolute;
+    translate: 0% 35%;
+}
+
+@media (max-width: 1199px) {
+    .icon1{
+        width: 80px;
+        position: absolute;
+        translate: -43% 45%;
+    }
+    
+    .icon2{
+        width: 80px;
+        position: absolute;
+        translate: -43% 0%;
+    }
+    
+    .icon3{
+        width: 80px;
+        position: absolute;
+        translate: -43% 20%;
+    }
+    
+    .icon4{
+        width: 70px;
+        position: absolute;
+        translate: -43% 20%;
+    }
+    
+    .icon5{
+        width: 60px;
+        position: absolute;
+        translate: -43% 45%;
+    }
+}
+
+.vermas-diario{
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.boton-mas {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #efa229;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+
+    width: 130px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    height: 35px;
+   }
+   
+   .boton-mas span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+   }
+   
+   .boton-mas span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+   }
+   
+   .boton-mas:hover span {
+    padding-right: 15px;
+   }
+   
+   .boton-mas:hover span:after {
+    opacity: 1;
+    right: 0;
+   }
+
+
+
