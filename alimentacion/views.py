@@ -82,3 +82,7 @@ def signin_view(request):
 def logout_view(request):
     logout(request)
     return redirect('inicio')
+
+def perfil(request):
+    context={}
+    return render(request, 'perfil/perfil.html', context)

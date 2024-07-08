@@ -51,7 +51,7 @@ def admin_view(request):
     if request.user.username == 'renato' and request.user.is_superuser:
         productos = Producto.objects.all()
         restaurantes = Restaurante.objects.all()
-        usuarios = Usuario.objects.all()
+        usuarios = User.objects.all()
         context = {'productos': productos, 'restaurantes': restaurantes, 'usuarios': usuarios}
         return render(request, 'administradores/admin_view.html', context)
     else:
