@@ -1,0 +1,253 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reclamos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" href="{% static '/css/reclamos.css' %}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio' %}">Alimentación Santiago <img class="logo-img" src="{% static 'img/logo.png' %}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menú
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Comida China</a></li>
+                      <li><a class="dropdown-item" href="#">Comida Casera</a></li>
+                      <li><a class="dropdown-item" href="#">Comida Rapida</a></li>
+                      <li><a class="dropdown-item" href="#">Comida Vegana</a></li>
+                      <li><a class="dropdown-item" href="#">Postres</a></li>
+                      <li><a class="dropdown-item" href="#">Menu del dia</a></li>
+                      <li><a class="dropdown-item" href="#">Menu de la semana</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="{% url 'menu' %}">Ver todo</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'restaurantes' %}">Restaurantes</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownContacto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Contáctanos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item active" href="{% url 'reclamos' %}">Reclamos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'feedback' %}">Feedback</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Contactanos</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="buscar" placeholder="Busca aquí..." aria-label="buscar">
+                <button class="btn btn-outline-success" type="submit" style="background: none;">Buscar</button>
+            </form>
+
+            <ul class="navbar-nav">
+              {% if user.is_authenticated %}
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLogin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ user.username }}
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownLogin">
+                          <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                      </ul>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login-usuarios' %}">Login</a>
+                  </li>
+              {% endif %}
+              <li class="nav-item">
+                  <a class="nav-link" href="#" id="cart-icon">
+                      <img class="carrito" src="{% static 'img/a.png' %}"> <span id="contador">0</span>
+                  </a>
+              </li>
+          </ul>
+        </div>
+    </div>
+  </nav>
+
+    <div class="container mt-5">
+        <h1 style="color: #3b3b3b;">- Deja tu reclamo -</h1>
+        <hr>
+        <div class="contenedor">
+          <form id="reclamoForm" action="{% url 'guardar_reclamo' %}" method="post">
+            {% csrf_token %}
+            <label for="nombre_restaurante">Nombre del Restaurante:</label>
+            <select id="nombre_restaurante" name="nombre_restaurante">
+                {% for x in restaurantes %}
+                    <option value="{{ x.id_restaurante }}">{{ x.nombre_restaurant }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="comentario_reclamo">Comentario de Reclamo:</label><br>
+            <textarea id="comentario_reclamo" name="comentario_reclamo" rows="4" cols="50"></textarea>
+            <br><br>
+            <button type="submit">Enviar Reclamo</button>
+        </form>
+      </div>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+  
+          <a class="logo-footer" href="#">Alimentacion Santiago <img class="footer-img" src="{% static 'img/logo.png' %}"></a>
+  
+  
+          <p class="footer-company-name">Alimentacion Santiago © 2015</p>
+          <p style="color: black;"> Estacion Central, Santiago. </p>
+          <div>
+            <i class="fa fa-phone"></i>
+            <a href="#" style="color: blue; font-size: 15px;">+56 9 1245 6989</a>
+          </div>
+  
+          <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:support@alimentacionsantiago.com" style="color: blue;">support@alimentacionsantiago.com</a></p>
+          </div>
+          
+        </div>
+  
+        <div class="footer-center">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26627.898863046325!2d-70.7237518531655!3d-33.462660144244495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c492530c08b1%3A0xa5c515683417f226!2sEstaci%C3%B3n%20Central%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1719198196687!5m2!1ses-419!2scl" width="350" height="200" style="border:0;"  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  
+        </div>
+  
+        <div class="footer-right">
+  
+          <p class="footer-company-about" style="color: rgb(0, 0, 0);">
+            <span style="color: black; font-size: 20px;">About the company</span>
+            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+          </p>
+  
+          <div class="footer-icons">
+  
+            <a href="#"><img src="{% static 'img/facebook.png' %}" alt="facebook" width="30px"></a>
+            <a href="#"><img src="{% static 'img/wsp.png' %}" alt="whatsapp" width="32px"></a>
+            <a href="#"><img src="{% static 'img/x.png' %}" alt="twitter" width="30px"></i></a>
+            <a href="#"><img src="{% static 'img/ig.png' %}" alt="instagram" width="30px"></a>
+  
+          </div>
+  
+        </div>
+      </footer>
+  
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('reclamoForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevenir el envío normal del formulario
+
+                // Deshabilitar el botón de enviar
+                submitButton.disabled = true;
+
+                // Enviar el formulario mediante AJAX
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Mostrar SweetAlert según la respuesta del servidor
+                    if (data.enviado) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Reclamo enviado correctamente!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Limpiar el formulario después de un envío exitoso
+                        form.reset();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al enviar el reclamo',
+                            text: 'Por favor, inténtalo nuevamente más tarde',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un problema al procesar tu solicitud',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+                .finally(() => {
+                    // Habilitar el botón de enviar nuevamente después de completar el envío
+                    submitButton.disabled = false;
+                });
+            });
+        });
+        </script>
+        
+  </body>
+  </html>
