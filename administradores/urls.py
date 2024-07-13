@@ -15,7 +15,10 @@ urlpatterns = [
     path('rosa_admin/<str:username>/', views.admin_view_rosa, name='rosa_admin_view'), 
     path('vegano_admin/<str:username>/', views.admin_view_vegano, name='vegano_admin_view'), 
     path('volcanes_admin/<str:username>/', views.admin_view_volcanes, name='volcanes_admin_view'),  
+    # VISTAS PARA LOS CRUD DE FUERTE
     path('carga_fuerte', views.carga_fuerte, name='carga_fuerte'),
     path('elimina_producto_fuerte/<int:pk>/', views.elimina_producto_fuerte, name="elimina_producto_fuerte"),
     path('carga_producto_fuerte', views.carga_producto_fuerte, name='carga_producto_fuerte'),
+    path('edicion_producto_fuerte/<int:pk>/', views.edicion_producto_fuerte, name='edicion_producto_fuerte'),
+    path('editar_producto_fuerte/<int:pk>/', views.editar_producto_fuerte, name='editar_producto_fuerte'),
 ]

@@ -48,9 +48,9 @@
                 <img src="{{ producto.imagen_producto.url }}" alt="Imagen de {{ producto.nombre_producto }}" class="img-fluid mb-3">
                 <p class="mb-1">{{ producto.descripcion }}</p>
                 <small class="text-muted">Restaurante: {{ producto.nombre_restaurante }}</small>
-                <div class="mt-3">
-                   
-                    <a href="{% url 'administradores:elimina_producto_fuerte' producto.id %}" class="btn btn-danger btn-accion">Borrar</a>
+                <div class="mt-3">                   
+                    <a href="{% url 'elimina_producto_fuerte' producto.id_producto %}" class="btn btn-danger btn-accion">Borrar</a>
+                    <a href="{% url 'edicion_producto_fuerte' producto.id_producto %}" class="btn btn-primary btn-accion">Modificar</a>
                 </div>
             </div>
             {% endfor %}

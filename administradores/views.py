@@ -236,41 +236,34 @@ def elimina_producto_fuerte(request, pk):
         'mensaje': mensaje
     }
     return render(request, 'administradores/fuerte/admin_view.html', context)
-    
+
 def edicion_producto_fuerte(request, pk):
     producto = get_object_or_404(Producto, id_producto=pk)
     data = {
-        'titulo': 'Edicion de producto',
-        'noticia': producto,
+        'titulo': 'Edición de producto',
+        'producto': producto,
     }
     return render(request, 'administradores/fuerte/modificar.html', data)
 
-def editar_producto_fuerte(request):
-    id_producto = int(request.POST['id'])
-    nombre_restaurante = models.ForeignKey('Restaurante', on_delete=models.CASCADE, db_column='idRest', default=1)
-    categoria_prod = request.POST['categoria_prod']
-    menusemanal_prod = request.POST['menusemanal_prod']
-    nombre_producto = request.POST['nombre_producto']
-    descripcion_producto = request.POST['descripcion_producto']
-    precio_producto = request.POST['precio_producto']
-    cantidad = request.POST['cantidad']
+def editar_producto_fuerte(request, pk):
+    if request.method == 'POST':
+        producto = get_object_or_404(Producto, id_producto=pk)
+        
+        producto.nombre_producto = request.POST.get('nombre_producto')
+        producto.categoria_prod_id = request.POST.get('categoria_prod')
+        producto.menusemanal_prod_id = request.POST.get('menusemanal_prod')
+        producto.descripcion_producto = request.POST.get('descripcion_producto')
+        producto.precio_producto = request.POST.get('precio_producto')
+        producto.cantidad = request.POST.get('cantidad')
 
-    producto = Producto.objects.get(id_producto=id)
+        producto.save()
+        return redirect('fuerte_admin_view', username=request.user.username)  
 
-    producto.nombre_producto = nombre_producto
-    producto.categoria_prod = categoria_prod
-    producto.nombre_producto =nombre_producto
-    producto.descripcion_producto = descripcion_producto
-    producto.precio_producto = precio_producto
-    producto.cantidad = cantidad
-    
-
-    producto.save()
-    return redirect(admin_view_fuerte)
-
+    else:
+        return redirect('edicion_producto_fuerte', pk=pk)
 
 def carga_producto_fuerte(request, producto_id=None):
-    if producto_id:  # Verifica si se proporciona un ID de producto
+    if producto_id: 
         producto = Producto.objects.get(pk=producto_id)
         form = ProductoForm(request.POST or None, request.FILES or None, instance=producto)
     else:
@@ -282,7 +275,7 @@ def carga_producto_fuerte(request, producto_id=None):
             mensaje = "Producto guardado con éxito"
             return render(request, 'administradores/fuerte/agregar.html', {'mensaje': mensaje, 'form': ProductoForm()})
         else:
-            print(form.errors)  # Esto mostrará todos los errores en la consola
+            print(form.errors)  # Esto lo use para ver que errores qliaos tenia para hacer la cuestion tiene que asepta
             return render(request, 'administradores/fuerte/agregar.html', {'form': form})
     
     return render(request, 'administradores/fuerte/agregar.html', {'form': form})
