@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from alimentacion.models import *
@@ -217,3 +217,52 @@ def admin_view_volcanes(request, username):
             return render(request, 'administradores/login.html', {'error_message': 'Usuario no encontrado.'})
     else:
         return redirect('login')
+    
+# CRUD PARA PRODUCTOS DE RESTAURANT "FUERTE" WTF esa wea existe?
+
+
+def elimina_producto_fuerte(request, pk):
+    try:
+        producto = Producto.objects.get(id_producto=pk)
+        producto.delete()
+        mensaje = "Artículo eliminado"
+    except Producto.DoesNotExist:
+        mensaje = "Artículo no existe"
+
+    productos = Producto.objects.all()
+    context = {
+        'productos': productos,
+        'mensaje': mensaje
+    }
+    return render(request, 'administradores/fuerte/admin_view.html', context)
+    
+def edicion_producto_fuerte(request, pk):
+    producto = get_object_or_404(Producto, id_producto=pk)
+    data = {
+        'titulo': 'Edicion de producto',
+        'noticia': producto,
+    }
+    return render(request, 'administradores/fuerte/modificar.html', data)
+
+def editar_producto_fuerte(request):
+    id_producto = int(request.POST['id'])
+    nombre_restaurante = models.ForeignKey('Restaurante', on_delete=models.CASCADE, db_column='idRest', default=1)
+    categoria_prod = request.POST['categoria_prod']
+    menusemanal_prod = request.POST['menusemanal_prod']
+    nombre_producto = request.POST['nombre_producto']
+    descripcion_producto = request.POST['descripcion_producto']
+    precio_producto = request.POST['precio_producto']
+    cantidad = request.POST['cantidad']
+
+    producto = Producto.objects.get(id_producto=id)
+
+    producto.nombre_producto = nombre_producto
+    producto.categoria_prod = categoria_prod
+    producto.nombre_producto =nombre_producto
+    producto.descripcion_producto = descripcion_producto
+    producto.precio_producto = precio_producto
+    producto.cantidad = cantidad
+    
+
+    producto.save()
+    return redirect(admin_view_fuerte)

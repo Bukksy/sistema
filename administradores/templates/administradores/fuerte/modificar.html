@@ -1,0 +1,68 @@
+{% load media %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h2>Edición de Noticias</h2>
+                {% if mensaje %}
+                    <div class="alert alert-success">{{ mensaje }}</div>
+                {% endif %}
+                <form id="newsForm" method="POST" action="{% url 'editar' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="id" value="{{ producto.id }}">
+                    
+                    <div class="mb-3">
+                        <label for="autor" class="form-label">Autor:</label>
+                        <input type="text" class="form-control" name="autor" value="{{ noticia.autor }}" required>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título:</label>
+                        <input type="text" class="form-control" name="titulo" value="{{ noticia.titulo }}" required>
+                    </div>
+                    <div>
+                        <label for="newsTitle" class="form-label">Tipo de noticia</label>
+                        <select class="form-select" id="tipo" name="tipo"  required data-parsley-trigger="change">
+                            <option value="{{noticia.tipo}}">{{noticia.tipo}}</option>
+                            <option value="deportes">Deportes</option>
+                            <option value="ciencias">Ciencias</option>
+                            <option value="farandula">Farandula</option>
+                            <option value="otros">Otro</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cuerpo" class="form-label">Cuerpo:</label>
+                        <textarea class="form-control" name="cuerpo" rows="5" required>{{ noticia.cuerpo }}</textarea>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha:</label>
+                        <input type="date" class="form-control" name="fecha" value="{{ noticia.fecha }}" disabled>
+                    </div>
+        
+                    <div class="mb-3">
+                        {% if noticia.imagen %}
+                            <div>
+                                <img src="{{ noticia.imagen.url }}" alt="Imagen actual" style="max-width: 200px;">
+                            </div>
+                        {% else %}
+                            <p>No hay imagen disponible.</p>
+                        {% endif %}
+                        
+                    </div>
+        
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
