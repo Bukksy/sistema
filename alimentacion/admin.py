@@ -7,4 +7,5 @@ admin.site.register(Restaurante)
 admin.site.register(Categoria)
 admin.site.register(diariosemanal)
 admin.site.register(Producto)
+admin.site.register(Profile)
 

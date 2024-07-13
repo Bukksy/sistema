@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import User
 
 class Categoria(models.Model):
     id_categoria = models.AutoField(db_column='idCategorias', primary_key=True)
@@ -52,4 +53,10 @@ class Producto(models.Model):
     class Meta:
         db_table = 'productos'
 
+class Profile(models.Model):
+    id_profile = models.AutoField(primary_key=True)
+    username_saldo = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    saldo = models.IntegerField()
 
+    class Meta:
+        db_table = 'profiles'

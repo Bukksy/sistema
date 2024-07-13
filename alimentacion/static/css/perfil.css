@@ -1,0 +1,35 @@
+.profile{
+    width: 150px;
+}
+
+#profile {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    text-align: center;
+}
+
+.Contenedor-padre{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor{
+    border: 1px solid black;
+    min-height: 200px;
+    width: 300px;
+}
+
+p{
+    margin: 0;
+}
+
+.principal{
+    font-size: 15px;
+}
