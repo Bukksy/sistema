@@ -38,6 +38,7 @@
 <body>
     <div class="container">
         <h2 class="text-center mb-4">Productos del Restaurante</h2>
+        <a href="{% url 'carga_producto_fuerte' %}" class="btn btn-primary btn-accion">Agregar nuevo productoq</a>
         <div class="list-group">
             {% for producto in productos_fuerte %}
             <div class="list-group-item list-group-item-action flex-column align-items-start noticia">
@@ -51,6 +52,7 @@
                 <div class="mt-3">                   
                     <a href="{% url 'elimina_producto_fuerte' producto.id_producto %}" class="btn btn-danger btn-accion">Borrar</a>
                     <a href="{% url 'edicion_producto_fuerte' producto.id_producto %}" class="btn btn-primary btn-accion">Modificar</a>
+                    
                 </div>
             </div>
             {% endfor %}
