@@ -135,3 +135,20 @@ def guardar_feedback(request):
         
     return render(request, 'pages/feedback.html')
 
+def metodos(request):
+    context = {}
+    return render(request, 'pages/metodos.html', context)
+
+
+def debito(request):
+    context = {}
+    return render(request, 'metodos/debito.html', context)
+def credito(request):
+    context = {}
+    return render(request, 'metodos/credito.html', context)
+def paypal(request):
+    context = {}
+    return render(request, 'metodos/paypal.html', context)
+def digital(request):
+    context = {}
+    return render(request, 'metodos/digital.html', context)

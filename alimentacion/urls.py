@@ -17,4 +17,11 @@ urlpatterns = [
 
     path('guardar_reclamo/', views.guardar_reclamo, name='guardar_reclamo'),
     path('guardar_feedback/', views.guardar_feedback, name='guardar_feedback'),
+
+
+    path('metodos/', views.metodos, name='metodos'),
+    path('paypal/', views.paypal, name='paypal'),
+    path('credito/', views.credito, name='credito'),
+    path('debito/', views.debito, name='debito'),
+    path('digital/', views.digital, name='digital'),
 ]
