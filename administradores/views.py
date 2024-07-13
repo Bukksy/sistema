@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from alimentacion.models import *
 from django.contrib.auth.models import User, Group
-
+from .forms import ProductoForm
 def login_admin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -219,7 +219,8 @@ def admin_view_volcanes(request, username):
         return redirect('login')
     
 # CRUD PARA PRODUCTOS DE RESTAURANT "FUERTE" WTF esa wea existe?
-
+def carga_fuerte(request):
+    return render(request, 'administradores/fuerte/agregar.html')
 
 def elimina_producto_fuerte(request, pk):
     try:
@@ -266,3 +267,22 @@ def editar_producto_fuerte(request):
 
     producto.save()
     return redirect(admin_view_fuerte)
+
+
+def carga_producto_fuerte(request, producto_id=None):
+    if producto_id:  # Verifica si se proporciona un ID de producto
+        producto = Producto.objects.get(pk=producto_id)
+        form = ProductoForm(request.POST or None, request.FILES or None, instance=producto)
+    else:
+        form = ProductoForm(request.POST or None, request.FILES or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            mensaje = "Producto guardado con éxito"
+            return render(request, 'administradores/fuerte/agregar.html', {'mensaje': mensaje, 'form': ProductoForm()})
+        else:
+            print(form.errors)  # Esto mostrará todos los errores en la consola
+            return render(request, 'administradores/fuerte/agregar.html', {'form': form})
+    
+    return render(request, 'administradores/fuerte/agregar.html', {'form': form})

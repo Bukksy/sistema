@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga de Noticias</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h2 class="text-center mb-4">Carga de Productos</h2>
+            
+                <form method="POST" action="carga_producto_fuerte" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre_producto">Nombre del producto</label>
+                        <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" required minlength="5" placeholder="Ingrese el nombre del producto">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre_restaurante">Restaurante ID</label>
+                        <input type="text" class="form-control" id="nombre_restaurante" name="nombre_restaurante"  value="3" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria_prod">Categoría de producto</label>
+                        <select class="form-control" id="categoria_prod" name="categoria_prod" required>
+                            <option value="">Seleccione el tipo de comida</option>
+                            <option value="1">Comida rápida</option>
+                            <option value="2">Comida vegana</option>
+                            <option value="3">Comida casera</option>
+                            <option value="4">Postres</option>
+                            <option value="5">Asiática</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_menu">Tipo de menú</label>
+                        <select class="form-control" id="menusemanal_prod" name="menusemanal_prod" required>
+                            <option value="">Seleccione el tipo de menú</option>
+                            <option value="1">Menú del Día</option>
+                            <option value="2">Menú de la Semana</option>
+                            <option value="3">Ninguno</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion_producto">Descripción del producto</label>
+                        <textarea class="form-control" id="descripcion_producto" name="descripcion_producto" rows="3" required placeholder="Ingrese una breve descripción del producto"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagen_producto">Seleccione imagen</label>
+                        <input type="file" class="form-control-file" id="imagen_producto" name="imagen_producto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio_producto">Ingrese el precio del producto</label>
+                        <input type="number" class="form-control" id="precio_producto" name="precio_producto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Ingrese la cantidad disponible del producto</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Cargar producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
