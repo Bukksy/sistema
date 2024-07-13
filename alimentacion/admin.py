@@ -8,4 +8,6 @@ admin.site.register(Categoria)
 admin.site.register(diariosemanal)
 admin.site.register(Producto)
 admin.site.register(Profile)
+admin.site.register(Reclamo)
+admin.site.register(Feedback)
 

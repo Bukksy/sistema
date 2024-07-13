@@ -60,3 +60,26 @@ class Profile(models.Model):
 
     class Meta:
         db_table = 'profiles'
+
+class Reclamo(models.Model):
+    id_reclamo = models.AutoField(primary_key=True)
+    nombre_restaurante = models.ForeignKey('Restaurante', on_delete=models.CASCADE, db_column='idRest', default=1)
+    comentario_reclamo = models.CharField(max_length=1000, validators=[MinLengthValidator(1)])
+
+    class Meta:
+        db_table = 'reclamos'
+
+    def __str__(self):
+        return f'Reclamo para {self.nombre_restaurante.nombre_restaurant}'
+
+    
+class Feedback(models.Model):
+    id_Feedback = models.AutoField(primary_key=True)
+    nombre_restaurante = models.ForeignKey('Restaurante', on_delete=models.CASCADE, db_column='idRest', default=1)
+    comentario_Feedback = models.CharField(max_length=1000, validators=[MinLengthValidator(1)])
+
+    class Meta:
+        db_table = 'Feedback'
+
+    def __str__(self):
+        return f'Feedback para {self.nombre_restaurante.nombre_restaurant}'

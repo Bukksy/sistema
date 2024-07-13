@@ -47,8 +47,8 @@
                         Contáctanos
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Reclamos</a></li>
-                      <li><a class="dropdown-item" href="#">Feedback</a></li>
+                      <li><a class="dropdown-item" href="{% url 'reclamos' %}">Reclamos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'feedback' %}">Feedback</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">Contactanos</a></li>
                     </ul>
@@ -67,7 +67,6 @@
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdownLogin">
                           <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
-                          <li><a class="dropdown-item" href="#">Configuración</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
                       </ul>

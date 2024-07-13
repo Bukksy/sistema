@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group 
+from django.http import JsonResponse
 from django.contrib import messages
+from django.urls import reverse
 import json, re
 from .models import *
 
@@ -86,3 +88,50 @@ def logout_view(request):
 def perfil(request):
     context={}
     return render(request, 'perfil/perfil.html', context)
+
+def reclamos(request):
+    restaurantes= Restaurante.objects.all()
+    context={'restaurantes': restaurantes}
+    return render(request, 'pages/reclamos.html', context)
+
+def guardar_reclamo(request):
+    mensaje = None
+    if request.method == 'POST':
+        nombre_restaurante_id = request.POST.get('nombre_restaurante')
+        comentario_reclamo = request.POST.get('comentario_reclamo')
+
+        # Guardar el reclamo en la base de datos
+        reclamo = Reclamo(nombre_restaurante_id=nombre_restaurante_id, comentario_reclamo=comentario_reclamo)
+        reclamo.save()
+        
+        response_data = {
+            'enviado': True,
+            'mensaje': 'Reclamo enviado correctamente'
+        }
+
+        return JsonResponse(response_data)
+        
+    return render(request, 'pages/reclamos.html')
+
+def feedback(request):
+    restaurantes= Restaurante.objects.all()
+    context={'restaurantes': restaurantes}
+    return render(request, 'pages/feedback.html', context)
+
+def guardar_feedback(request):
+    if request.method == 'POST':
+        nombre_restaurante_id = request.POST.get('nombre_restaurante')
+        comentario_feedback = request.POST.get('comentario_feedback')
+
+        feedback = Feedback(nombre_restaurante_id=nombre_restaurante_id, comentario_Feedback=comentario_feedback)
+        feedback.save()
+        
+        response_data = {
+            'enviado': True,
+            'mensaje': 'Reclamo enviado correctamente'
+        }
+
+        return JsonResponse(response_data)
+        
+    return render(request, 'pages/feedback.html')
+

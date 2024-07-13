@@ -12,4 +12,9 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('perfil/', views.perfil, name='perfil'),
+    path('reclamos/', views.reclamos, name='reclamos'),
+    path('feedback/', views.feedback, name='feedback'),
+
+    path('guardar_reclamo/', views.guardar_reclamo, name='guardar_reclamo'),
+    path('guardar_feedback/', views.guardar_feedback, name='guardar_feedback'),
 ]
